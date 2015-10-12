@@ -1,0 +1,51 @@
+{
+  "name": "redux-hacker-news",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "redux",
+    "react"
+  ],
+  "contributors": [
+    "Tony Ngan <tonynwk919@gmail.com>"
+  ],
+  "author": "tngan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tngan/redux-hacker-news"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "history": "^1.9.0",
+    "humps": "^0.6.0",
+    "isomorphic-fetch": "^2.1.1",
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
+    "react-redux": "^2.1.2",
+    "react-router": "^1.0.0-rc1",
+    "redux": "^3.0.0",
+    "redux-logger": "^2.0.2",
+    "redux-router": "^1.0.0-beta3",
+    "redux-thunk": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.1.4",
+    "babel-plugin-react-transform": "^1.1.0",
+    "concurrently": "^0.1.1",
+    "css-loader": "^0.19.0",
+    "express": "^4.13.3",
+    "file-loader": "^0.8.4",
+    "moment": "^2.10.6",
+    "react-transform-hmr": "^1.0.0",
+    "redux-devtools": "^2.1.5",
+    "style-loader": "^0.12.4",
+    "url": "^0.11.0",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
+  }
+}

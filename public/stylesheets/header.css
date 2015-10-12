@@ -1,0 +1,41 @@
+/*
+    Edited and forked from https://github.com/mking/react-hn/blob/master/css/NewsHeader.css
+*/
+
+.newsHeader {
+  align-items: center;
+  background: #ff6600;
+  color: black;
+  display: flex;
+  font-size: 10pt;
+  padding: 2px;
+}
+
+.newsHeader-logo {
+  border: 1px solid white;
+  flex-basis: 18px;
+  height: 18px;
+}
+
+.newsHeader-textLink {
+  color: black;
+  text-decoration: none;
+}
+
+.newsHeader-title {
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.newsHeader-nav {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.newsHeader-navLink:not(:first-child)::before {
+  content: ' | ';
+}
+
+.newsHeader-login {
+  margin-right: 5px;
+}
