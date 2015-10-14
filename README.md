@@ -13,7 +13,7 @@ Access localhost:3000 then you can see the front page of Hacker News.
 
 Flow
 ---
-According to the documentation in [Firebase API](https://github.com/HackerNews/API), they don't provide a call for getting the context of all top news threads in a single call, so an alternative workaround is to get all `id` of top 500 news threads first.
+According to the documentation in [Firebase API](https://github.com/HackerNews/API), they don't provide a single call for getting the context of all top news threads, so an alternative workaround is to get all `id` of top 500 news threads first.
 
 https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
