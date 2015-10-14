@@ -17,7 +17,7 @@ According to the documentation in [Firebase API](https://github.com/HackerNews/A
 
 https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
-Once we have the `id` of each news thread, we can render the front page including the header, the ranking of each news thread like you can see in the demo. Then another API call is made for each news thread and get back its own context. 
+Once we have the `id` of each news thread, we can render the front page including the header, the ranking of each news thread like you can see in the demo. Then another API call is made for each news thread and retrieving its own context. 
 
 https://hacker-news.firebaseio.com/v0/item/123456.json?print=pretty
 
@@ -53,7 +53,7 @@ function rootReducer(state = initialState, action) {
 	}
 }
 ```
-To prevent the API calls which are invoked again when the list and threads are re-rendered, we have made simple checkings `shouldFetchNewsThreads (state)` and `shouldFetchNewsThread (state, id)` before the actions really dispatched.
+We have to prevent the API calls which are invoked again when the list and threads are re-rendered. Simple checkings `shouldFetchNewsThreads (state)` and `shouldFetchNewsThread (state, id)` have been made before a dispatch of action.
 
 ```javascript
 function shouldFetchNewsThreads ( state = { ids: new Map() } ) {
@@ -64,6 +64,14 @@ function shouldFetchNewsThread ( state = { ids: new Map() }, id ) {
 	return state.ids.has(id);
 }
 ```
+
+Configuration
+---
+You may want to modify the number of news threads in front-page, it is stored in `/constants/index.js`.
+```javascript
+export const MAX_THREAD_NUMBER = 30;
+```
+Refresh the page then you can see the change.
 
 Thanks
 ---
