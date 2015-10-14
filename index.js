@@ -3,7 +3,7 @@ import 'babel-core/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import NewsThreadList from './components/NewsThreadList';
+import NewsThreadList from './containers/NewsThreadList';
 import configureStore from './store/configureStore';
 
 const store = configureStore();

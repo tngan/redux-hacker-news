@@ -12,15 +12,11 @@ class NewsThread extends Component {
     constructor(props) {
         super(props);
         this._id = this.props.threadId;
+        this._rank = this.props.rank; // Rank is not included in context object
     }
 
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch(fetchNewsThreadIfNeeded(this.props.threadId));
-    }
-
-    getProps() {
-        return this.props[this._id];
+        this.props.dispatch(fetchNewsThreadIfNeeded(this._id));
     }
 
     getCommentLink(props) {
@@ -44,7 +40,7 @@ class NewsThread extends Component {
     getRank(props) {
         return (
           <div className="newsItem-rank">
-            {props.rank}.
+            {this._rank}.
           </div>
         );
     }
@@ -85,7 +81,7 @@ class NewsThread extends Component {
     }
 
     render() {
-        let props = this.getProps();
+        let props = this.props.context || {};
         return (
             <div className="newsItem">
                 {this.getRank(props)}
@@ -103,20 +99,4 @@ NewsThread.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-    const { ids } = state || {
-        ids: new Map()
-    };
-    let props = {},
-        rank = 1;
-
-    for (let [threadId,context] of ids) {
-        props[threadId] = Object.assign({},{
-            rank: rank++
-        },context);
-    }
-
-    return props;
-}
-
-export default connect(mapStateToProps)(NewsThread);
+export default NewsThread;

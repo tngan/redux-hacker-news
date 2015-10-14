@@ -15,14 +15,16 @@ class NewsThreadList extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
+        this.dispatch = dispatch;
         dispatch(fetchNewsThreadsIfNeeded());
     }
 
     render() {
         const { ids } = this.props;
-        let newsThread = [];
-        for (let [id,fetching] of ids) {
-            newsThread = [...newsThread, <NewsThread key={id} threadId={id} />];
+        let newsThread = [],
+            rank = 1;
+        for (let [ id, context ] of ids) {
+            newsThread = [...newsThread, <NewsThread key={id} rank={rank++} threadId={id} dispatch={this.dispatch} context={context} />];
         }
         return (
             <div className="newsList">
@@ -40,7 +42,7 @@ NewsThreadList.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { ids, inValidate } = state || {
+    const { ids } = state || {
         ids: new Map()
     };
     return {
