@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { GIF_Y18, GIF_S, BASE_API_URL, YCOMB_DOMAIN, NEWS_YCOMB_DOMAIN } from '../constants'; // load the gif data
+import { GIF_Y18, GIF_S, BASE_API_URL, YCOMB_DOMAIN, NEWS_DOMAIN } from '../constants'; // load the gif data
 import '../public/stylesheets/header.css';
 
 class NewsHeader extends Component {
@@ -16,25 +16,25 @@ class NewsHeader extends Component {
 		        	</a>
 		      	</div>
 	        	<div className="newsHeader-title">
-		        	<a className="newsHeader-textLink" href={NEWS_YCOMB_DOMAIN}>Hacker News</a>
+		        	<a className="newsHeader-textLink" href={NEWS_DOMAIN}>Hacker News</a>
 		      	</div>
 		      	<div className="newsHeader-nav">
-			      	<a key="newest" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_YCOMB_DOMAIN}news`}>
+			      	<a key="newest" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}newest`}>
 	              		new
             		</a>
-            		<a key="newcomments" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_YCOMB_DOMAIN}newcomments`}>
+            		<a key="newcomments" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}newcomments`}>
 	              		comments
             		</a>
-            		<a key="show" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_YCOMB_DOMAIN}show`}>
+            		<a key="show" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}show`}>
 	              		show
             		</a>
-            		<a key="ask" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_YCOMB_DOMAIN}ask`}>
+            		<a key="ask" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}ask`}>
 	              		ask
             		</a>
-            		<a key="jobs" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_YCOMB_DOMAIN}jobs`}>
+            		<a key="jobs" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}jobs`}>
 	              		jobs
             		</a>
-            		<a key="submit" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_YCOMB_DOMAIN}submit`}>
+            		<a key="submit" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}submit`}>
 	              		submit
             		</a>
             	</div>

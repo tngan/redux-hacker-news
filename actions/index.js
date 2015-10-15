@@ -2,106 +2,125 @@ import fetch from 'isomorphic-fetch';
 import { MAX_THREAD_NUMBER, BASE_API_URL } from '../constants';
 
 /*********************************************************
-* Action definition
+* Util function
 * 
-* requestNewsThreads
-* requestNewsThread
-* receiveNewsThreads
-* receiveNewsThread
+* getApiUrlByItemType
 *
 *********************************************************/
-export const REQUEST_NEWSTHREADS = 'REQUEST_NEWSTHREADS';
-function requestNewsThreads () {
+function getApiUrlByItemType (type) {
+	switch (type) {
+		case 'ask':
+			return 'askstories';
+		case 'newest':
+			return 'newstories';
+		case 'show':
+			return 'showstories';
+		default:
+			return 'topstories';
+	}
+}
+/*********************************************************
+* Action definition
+* 
+* requestItemThreads
+* requestItemThread
+* receiveItemThreads
+* receiveItemThread
+*
+*********************************************************/
+export const REQUEST_ITEMTHREADS = 'REQUEST_ITEMTHREADS';
+function requestItemThreads () {
 	return {
-		type: REQUEST_NEWSTHREADS, // must have type
-		text: 'Requesting the top news threads'
+		type: REQUEST_ITEMTHREADS, // must have type
+		text: 'Requesting the top item threads'
 	}
 }
 
-export const REQUEST_NEWSTHREAD = 'REQUEST_NEWSTHREAD';
-function requestNewsThread ( id ) {
+export const REQUEST_ITEMTHREAD = 'REQUEST_ITEMTHREAD';
+function requestItemThread ( id ) {
 	return {
-		type: REQUEST_NEWSTHREAD,
+		type: REQUEST_ITEMTHREAD,
 		id: id,
-		text: `Requesting the news thread with id ${id}`
+		text: `Requesting the item thread with id ${id}`
 	}
 }
 
-export const RECEIVE_NEWSTHREADS = 'RECEIVE_NEWSTHREADS';
-function receiveNewsThreads ( json ) {
+export const RECEIVE_ITEMTHREADS = 'RECEIVE_ITEMTHREADS';
+function receiveItemThreads ( json ) {
 	return {
-		type: RECEIVE_NEWSTHREADS,
+		type: RECEIVE_ITEMTHREADS,
 		ids: json
 	}
 }
 
-export const RECEIVE_NEWSTHREAD = 'RECEIVE_NEWSTHREAD';
-function receiveNewsThread ( json ) {
+export const RECEIVE_ITEMTHREAD = 'RECEIVE_ITEMTHREAD';
+function receiveItemThread ( json ) {
 	return {
-		type: RECEIVE_NEWSTHREAD,
+		type: RECEIVE_ITEMTHREAD,
 		context: json
 	}
 }
 /*********************************************************
 * Bound Action Creators that automatically dispatches
 * 
-* fetchNewsThreads
-* fectchNewsThread
+* fetchItemThreads
+* fetchItemThread
 *
 *********************************************************/
+function fetchItemThreads ( state ) {
 
-function fetchNewsThreads () {
+	let type = state.router.location.pathname.replace('/',''); // remove the first slash
+
 	return dispatch => {
-		dispatch(requestNewsThreads());
-		return fetch(`${BASE_API_URL}topstories.json`)
+		dispatch(requestItemThreads());
+		return fetch(`${BASE_API_URL}${getApiUrlByItemType(type)}.json`)
 			.then(response => response.json())
 			.then(json => {
 				let skim = json.slice(0,MAX_THREAD_NUMBER); // reduce the page size
-				dispatch(receiveNewsThreads(skim));
+				dispatch(receiveItemThreads(skim));
 			});
 	};
 }
 
-function fetchNewsThread ( id ) {
+function fetchItemThread ( id ) {
 	return dispatch => {
-		dispatch(requestNewsThread(id));
+		dispatch(requestItemThread(id));
 		return fetch(`${BASE_API_URL}item/${id}.json`)
 			.then(response => response.json())
-			.then(json => dispatch(receiveNewsThread(json)));
+			.then(json => dispatch(receiveItemThread(json)));
 	};
 }
-
 /*********************************************************
 * Some checking functions before fetching
 * 
-* shouldFetchNewsThreads
-* shouldFetchNewsThread
+* shouldFetchItemThreads
+* shouldFetchItemThread
 *
 *********************************************************/
-function shouldFetchNewsThreads ( state = { 
+function shouldFetchItemThreads ( state = { 
 	ids: new Map()
 }) {
-	return state.ids.size === 0;
+	return state.thread.ids.size === 0;
 }
 
-function shouldFetchNewsThread ( state = {
+function shouldFetchItemThread ( state = {
 	ids: new Map() 
 }, id ) {
-	return state.ids.has(id);
+	return state.thread.ids.has(id);
 }
 
-export function fetchNewsThreadsIfNeeded () {
+export function fetchItemThreadsIfNeeded () {
 	return (dispatch, getState) => {
-		if (shouldFetchNewsThreads(getState())) {
-			return dispatch(fetchNewsThreads());
+		if (shouldFetchItemThreads(getState())) {
+			return dispatch(fetchItemThreads(getState()));
 		}
 	};
 }
 
-export function fetchNewsThreadIfNeeded ( id ) {
+export function fetchItemThreadIfNeeded ( id ) {
 	return (dispatch, getState) => {
-		if (shouldFetchNewsThread(getState()),id){
-			return dispatch(fetchNewsThread(id));
+		if (shouldFetchItemThread(getState()),id){
+			return dispatch(fetchItemThread(id));
 		}
 	};
 }

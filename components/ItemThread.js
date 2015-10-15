@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import url from 'url';
-import { fetchNewsThreadIfNeeded } from '../actions';
+import { fetchItemThreadIfNeeded } from '../actions';
 import { GIF_GRAY_ARROW_2X } from '../constants'; // load the gif data
 
 import '../public/stylesheets/thread.css';
 
-class NewsThread extends Component {
+class ItemThread extends Component {
 
     constructor(props) {
         super(props);
@@ -16,7 +16,7 @@ class NewsThread extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchNewsThreadIfNeeded(this._id));
+        this.props.dispatch(fetchItemThreadIfNeeded(this._id));
     }
 
     getCommentLink(props) {
@@ -52,7 +52,7 @@ class NewsThread extends Component {
             protocol = parseUrl.protocol + '//' || '',
             host = protocol + hostname;
         return {
-            hostname,
+            hostname: hostname === '' ? '' : `(${hostname})`,
             threadUrl,
             host
         };
@@ -64,7 +64,7 @@ class NewsThread extends Component {
             <div className="newsItem-title">
                 <a className="newsItem-titleLink" href={props.url}>{props.title}</a>
                 <span className="newsItem-domain">
-                    ({hostname})
+                    {hostname}
                 </span>
             </div>
         );
@@ -95,8 +95,8 @@ class NewsThread extends Component {
     }
 }
 
-NewsThread.propTypes = {
+ItemThread.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-export default NewsThread;
+export default ItemThread;
