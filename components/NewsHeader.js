@@ -6,12 +6,44 @@ import '../public/stylesheets/header.css';
 class NewsHeader extends Component {
 	constructor(props) {
 		super(props);
+		this._selectedPath = props.selectedPath || '';
+	}
+	getNavItem(config, isFocus = false){
+		let {link, display} = config,
+		 	style = isFocus ? 'link-selected' : '';
+  		return (
+			<a key={link} className={`newsHeader-navLink newsHeader-textLink ${style}`} href={`${NEWS_DOMAIN}${link}`}>
+          		{display}
+    		</a>
+		);
 	}
 	render() {
+		let navItemConfigs = [{
+			link: 'newest',
+			display: 'new'
+		},{
+			link: 'newcomments',
+			display: 'comments'
+		},{
+			link: 'show',
+			display: 'show'
+		},{
+			link: 'ask',
+			display: 'ask'
+		},{
+			link: 'jobs',
+			display: 'jobs'
+		},{
+			link: 'submit',
+			display: 'submit'
+		}];
+
+		console.log(this._selectedPath);
+
 		return (
 			<div className="newsHeader">
 	        	<div className="newsHeader-logo">
-		        	<a href="YCOMB_DOMAIN">
+		        	<a href="/">
 		        		<img src={GIF_Y18} />
 		        	</a>
 		      	</div>
@@ -19,24 +51,7 @@ class NewsHeader extends Component {
 		        	<a className="newsHeader-textLink" href={NEWS_DOMAIN}>Hacker News</a>
 		      	</div>
 		      	<div className="newsHeader-nav">
-			      	<a key="newest" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}newest`}>
-	              		new
-            		</a>
-            		<a key="newcomments" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}newcomments`}>
-	              		comments
-            		</a>
-            		<a key="show" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}show`}>
-	              		show
-            		</a>
-            		<a key="ask" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}ask`}>
-	              		ask
-            		</a>
-            		<a key="jobs" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}jobs`}>
-	              		jobs
-            		</a>
-            		<a key="submit" className="newsHeader-navLink newsHeader-textLink" href={`${NEWS_DOMAIN}submit`}>
-	              		submit
-            		</a>
+			      	{ navItemConfigs.map(config => this.getNavItem(config, this._selectedPath === config.link)) }
             	</div>
             	<div className="newsHeader-login">
 		        	<a className="newsHeader-textLink" href="https://news.ycombinator.com/login?whence=news">login</a>

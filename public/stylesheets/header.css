@@ -22,6 +22,10 @@
   text-decoration: none;
 }
 
+.newHeader-focus {
+  color: #ffffff;
+}
+
 .newsHeader-title {
   font-weight: bold;
   margin-left: 4px;
@@ -32,10 +36,16 @@
   margin-left: 10px;
 }
 
+/* avoid replacing by white color due to routing */
 .newsHeader-navLink:not(:first-child)::before {
   content: ' | ';
+  color: black !important;
 }
 
 .newsHeader-login {
   margin-right: 5px;
+}
+
+.link-selected {
+  color: white;
 }

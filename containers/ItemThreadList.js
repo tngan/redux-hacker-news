@@ -21,7 +21,7 @@ class ItemThreadList extends Component {
     }
 
     render() {
-        const { ids } = this.props;
+        const { ids, selectedPath } = this.props;
         let iThread = [],
             rank = 1;
         for (let [ id, context ] of ids) {
@@ -29,7 +29,7 @@ class ItemThreadList extends Component {
         }
         return (
             <div className="newsList">
-                <NewsHeader />
+                <NewsHeader selectedPath={selectedPath} />
                 <div className="newsList-newsItems">
                     {iThread}
                 </div>
@@ -42,4 +42,4 @@ ItemThreadList.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-export default connect(state => ({ ids: state.thread.ids || new Map() }))(ItemThreadList);
+export default connect(state => ({ ids: state.thread.ids || new Map(), selectedPath: state.router.location.pathname.replace('/','') }))(ItemThreadList);
