@@ -38,8 +38,6 @@ class NewsHeader extends Component {
 			display: 'submit'
 		}];
 
-		console.log(this._selectedPath);
-
 		return (
 			<div className="newsHeader">
 	        	<div className="newsHeader-logo">

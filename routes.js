@@ -7,5 +7,6 @@ export default (
   	<Route path="/newest" component={ItemThreadList} />
     <Route path="/show" component={ItemThreadList} />
     <Route path="/ask" component={ItemThreadList} />
+    <Route path="/jobs" component={ItemThreadList} />
   </Route>
 );

@@ -25,7 +25,7 @@ class ItemThreadList extends Component {
         let iThread = [],
             rank = 1;
         for (let [ id, context ] of ids) {
-            iThread = [...iThread, <ItemThread key={id} rank={rank++} threadId={id} dispatch={this.dispatch} context={context} />];
+            iThread = [...iThread, <ItemThread key={id} selectedPath={selectedPath} rank={rank++} threadId={id} dispatch={this.dispatch} context={context} />];
         }
         return (
             <div className="newsList">

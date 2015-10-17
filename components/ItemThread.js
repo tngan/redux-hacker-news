@@ -25,16 +25,21 @@ class ItemThread extends Component {
           commentText = props.kids.length + ' comments';
         }
         return (
-            <a href={'https://news.ycombinator.com/item?id=' + props.threadId}>{commentText}</a>
+            <a href={'https://news.ycombinator.com/item?id=' + props.id}>{commentText}</a>
         );
       }
 
-    getSubtext(props) {
-        return (
+    getSubtext(props, cleanDisplay = false) {
+        let timeBeforeNow = moment.utc(props.time * 1000).fromNow();
+        return !cleanDisplay ? (
             <div className="newsItem-subtext">
-                {props.score} points by <a href={'https://news.ycombinator.com/user?id=' + props.by}>{props.by}</a> {moment.utc(props.time * 1000).fromNow()} | {this.getCommentLink(props)}
+                {props.score} points by <a href={'https://news.ycombinator.com/user?id=' + props.by}>{props.by}</a> {timeBeforeNow} | {this.getCommentLink(props)}
             </div>
-        )
+        ) : (
+            <div className="newsItem-subtext">
+                {timeBeforeNow}
+            </div>
+        );
     }
 
     getRank(props) {
@@ -82,7 +87,16 @@ class ItemThread extends Component {
 
     render() {
         let props = this.props.context || {};
-        return (
+        let cleanDisplay = this.props.selectedPath === 'jobs';
+
+        return cleanDisplay ? (
+            <div className="newsItem margin-left-10">
+                <div className="newsItem-itemText">
+                    {this.getTitle(props)}
+                    {this.getSubtext(props,true)}
+                </div>
+            </div>
+        ) : (
             <div className="newsItem">
                 {this.getRank(props)}
                 {this.getVote(props)}

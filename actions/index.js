@@ -15,6 +15,8 @@ function getApiUrlByItemType (type) {
 			return 'newstories';
 		case 'show':
 			return 'showstories';
+		case 'jobs':
+			return 'jobstories';
 		default:
 			return 'topstories';
 	}
