@@ -21,10 +21,10 @@ class ItemThreadList extends Component {
         dispatch(fetchItemThreadsIfNeeded());
     }
 
-    getMore() {
+    getMore(selectedPath,page) {
         return (
             <div className="newsList-more">
-                <a className="newsList-moreLink" href="https://news.ycombinator.com/news?p=2">More</a>
+                <a className="newsList-moreLink" href={`/${selectedPath}?p=${parseInt(page)+1}`}>More</a>
             </div>
         );
     }
@@ -38,10 +38,9 @@ class ItemThreadList extends Component {
     render() {
         const { ids, selectedPath, page } = this.props;
         let iThread = [],
-            rank = 1;
+            rank = 1 + MAX_THREAD_NUMBER * (page - 1);
 
         for (let [ id, context ] of ids) {
-            if (rank > 30) break;
             iThread = [...iThread, <ItemThread key={id} selectedPath={selectedPath} rank={rank++} threadId={id} dispatch={this.dispatch} context={context} />];
         }
 
@@ -51,7 +50,7 @@ class ItemThreadList extends Component {
                 <div className="newsList-newsItems">
                     {iThread}
                 </div>
-                { ids.size > 0 && this.getMore() }
+                { ids.size > 0 && this.getMore(selectedPath, page) }
                 { ids.size > 0 && this.getFooter() }
             </div>
         );
@@ -64,5 +63,6 @@ ItemThreadList.propTypes = {
 
 export default connect(state => ({ 
     ids: state.thread.ids || new Map(), 
-    selectedPath: state.router.location.pathname.replace('/','') 
+    selectedPath: state.router.location.pathname.replace('/',''),
+    page: parseInt(state.router.location.query.p) || 1
 }))(ItemThreadList);

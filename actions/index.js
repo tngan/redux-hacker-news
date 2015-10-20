@@ -72,13 +72,14 @@ function receiveItemThread ( json ) {
 function fetchItemThreads (state) {
 
 	let type = state.router.location.pathname.replace('/',''); // remove the first slash
+	let page = parseInt(state.router.location.query.p) || 1;
 
 	return dispatch => {
 		dispatch(requestItemThreads());
 		return fetch(`${BASE_API_URL}${getApiUrlByItemType(type)}.json`)
 			.then(response => response.json())
 			.then(json => {
-				let skim = json.slice(0,MAX_THREAD_NUMBER); // reduce the page size
+				let skim = json.slice((page - 1) * MAX_THREAD_NUMBER, MAX_THREAD_NUMBER * page); // reduce the page size
 				dispatch(receiveItemThreads(skim));
 			});
 	};
