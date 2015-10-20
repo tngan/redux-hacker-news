@@ -8,3 +8,22 @@ body {
   margin-right: auto;
   width: 85%;
 }
+
+.newsList-more {
+  margin-left: 40px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.newsList-moreLink {
+  color: black;
+  font-size: 10pt;
+  text-decoration: none;
+}
+
+.footer-line{
+	background: #ff6600;
+	margin-top: 3px;
+	height: 2px;
+	width: 100%;
+}

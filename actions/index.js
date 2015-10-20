@@ -69,7 +69,7 @@ function receiveItemThread ( json ) {
 * fetchItemThread
 *
 *********************************************************/
-function fetchItemThreads ( state ) {
+function fetchItemThreads (state) {
 
 	let type = state.router.location.pathname.replace('/',''); // remove the first slash
 
@@ -84,12 +84,16 @@ function fetchItemThreads ( state ) {
 	};
 }
 
-function fetchItemThread ( id ) {
+function fetchItemThread (state, id) {
 	return dispatch => {
 		dispatch(requestItemThread(id));
 		return fetch(`${BASE_API_URL}item/${id}.json`)
 			.then(response => response.json())
-			.then(json => dispatch(receiveItemThread(json)));
+			.then(json => {
+				if(json.type !== 'comment') {
+					dispatch(receiveItemThread(json));
+				}
+			});
 	};
 }
 /*********************************************************
@@ -122,7 +126,7 @@ export function fetchItemThreadsIfNeeded () {
 export function fetchItemThreadIfNeeded ( id ) {
 	return (dispatch, getState) => {
 		if (shouldFetchItemThread(getState()),id){
-			return dispatch(fetchItemThread(id));
+			return dispatch(fetchItemThread(getState(), id));
 		}
 	};
 }

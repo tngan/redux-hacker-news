@@ -33,8 +33,8 @@ function thread(state = initialState, action) {
 }
 
 const rootReducer = combineReducers({
-  router: routerStateReducer,
-  thread
+	router: routerStateReducer,
+	thread
 });
 
 export default rootReducer;
