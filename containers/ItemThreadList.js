@@ -15,7 +15,7 @@ class ItemThreadList extends Component {
         super(props);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { dispatch } = this.props;
         this.dispatch = dispatch;
         dispatch(fetchItemThreadsIfNeeded());
@@ -40,8 +40,8 @@ class ItemThreadList extends Component {
         let iThread = [],
             rank = 1 + MAX_THREAD_NUMBER * (page - 1);
 
-        for (let [ id, context ] of ids) {
-            iThread = [...iThread, <ItemThread key={id} selectedPath={selectedPath} rank={rank++} threadId={id} dispatch={this.dispatch} context={context} />];
+        for (let [ key, value ] of ids) {
+            iThread = [...iThread, <ItemThread key={rank} selectedPath={selectedPath} rank={rank++} threadId={key} dispatch={this.dispatch} context={value} />];
         }
 
         return (

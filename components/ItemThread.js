@@ -15,10 +15,6 @@ class ItemThread extends Component {
         this._rank = this.props.rank; // Rank is not included in context object
     }
 
-    componentDidMount() {
-        this.props.dispatch(fetchItemThreadIfNeeded(this._id));
-    }
-
     getCommentLink(props) {
         let commentText = 'discuss';
         if (props.kids && props.kids.length) {
