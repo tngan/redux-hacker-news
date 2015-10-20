@@ -73,6 +73,11 @@ export const MAX_THREAD_NUMBER = 30;
 ```
 Refresh the page then you can see the change.
 
+Todo
+---
++ Apply Firebase SDK
++ Complete /newscomment page
+
 Thanks
 ---
 [mking/react-hn](https://github.com/mking/react-hn) for a great visual React tutorial, HTML and CSS are being re-used here.
