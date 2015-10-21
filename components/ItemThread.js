@@ -25,15 +25,25 @@ class ItemThread extends Component {
         );
       }
 
+    getAuthor(props) {
+        let by = props.by;
+        return (
+            <a href={'https://news.ycombinator.com/user?id=' + by}>{by}</a>
+        );
+    }
+
+    getLastUpdatedTime(props) {
+        return moment.utc(props.time * 1000).fromNow();
+    }
+
     getSubtext(props, cleanDisplay = false) {
-        let timeBeforeNow = moment.utc(props.time * 1000).fromNow();
         return !cleanDisplay ? (
             <div className="newsItem-subtext">
-                {props.score} points by <a href={'https://news.ycombinator.com/user?id=' + props.by}>{props.by}</a> {timeBeforeNow} | {this.getCommentLink(props)}
+                {props.score} points by {this.getAuthor(props)} {this.getLastUpdatedTime(props)} | {this.getCommentLink(props)}
             </div>
         ) : (
             <div className="newsItem-subtext">
-                {timeBeforeNow}
+                {this.getLastUpdatedTime(props)}
             </div>
         );
     }
@@ -106,7 +116,7 @@ class ItemThread extends Component {
 }
 
 ItemThread.propTypes = {
-    dispatch: PropTypes.func.isRequired
+    
 };
 
 export default ItemThread;

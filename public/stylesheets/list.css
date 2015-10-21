@@ -27,3 +27,9 @@ body {
 	height: 2px;
 	width: 100%;
 }
+
+.initial-wrapper{
+  text-align: center;
+  height: 100px;
+  margin-top: 50px;
+}
