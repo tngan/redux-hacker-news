@@ -14,7 +14,12 @@
 .newscomment-content{
 	width: 98%; /* 100% makes too close to edge */
 	margin-top: 9px;
+	margin-bottom: 9px;
 	color: #000000;
 	font-family: Verdana, Geneva, sans-serif;
     font-size: 9pt;
+}
+
+.newscomment-content a {
+	color: #000000;
 }

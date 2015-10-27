@@ -5,6 +5,7 @@
 .newsItem {
   color: #828282;
   margin-top: 5px;
+  margin-left: 2px;
   align-items: baseline;
   display: flex; 
 }
@@ -30,6 +31,7 @@
 
 .newsItem-itemText {
   flex-grow: 1;
+  margin-left: 5px;
 }
 
 .newsItem-rank {
@@ -39,7 +41,6 @@
 }
 
 .newsItem-vote {
-  flex-basis: 15px;
   text-align: center;
 }
 
