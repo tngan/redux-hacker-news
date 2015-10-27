@@ -1,22 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
-import { connect } from 'react-redux';
-import ItemThread from './ItemThread';
-import url from 'url';
-import { fetchItemThreadIfNeeded } from '../actions';
-import { GIF_GRAY_ARROW_2X } from '../constants'; // load the gif data
+import React, { Component } from 'react';
+import { getVote, getAuthor, getLastUpdatedTime } from './Composition';
 
 import '../public/stylesheets/comment.css';
 
-class CommentThread extends ItemThread {
-	
-	constructor(props) {
-		super(props);
-	}
-
-	componentDidMount() {
-
-	}
+class CommentThread extends Component {
 
 	getParentLink(props) {
 		return (
@@ -33,7 +20,7 @@ class CommentThread extends ItemThread {
 	getCommentInfoHeader(props) {
 		return (
 			<div className="newscomment-header">
-				{super.getAuthor(props)} {super.getLastUpdatedTime(props)} | {this.getParentLink(props)} | {this.getOnLink(props)}
+				{getAuthor(props)} {getLastUpdatedTime(props)} | {this.getParentLink(props)} | {this.getOnLink(props)}
 			</div>
 		);
 	}
@@ -48,8 +35,8 @@ class CommentThread extends ItemThread {
 	render() {
 		let props = this.props.context || {};
 		return (
-			<div className="newsItem margin-left-10">
-				{super.getVote()}
+			<div className="newsItem">
+				{getVote(props)}
 				<div className="newsItem-itemText">
 					{this.getCommentInfoHeader(props)}
 					{this.getContent(props)}
@@ -58,9 +45,5 @@ class CommentThread extends ItemThread {
 		);		
 	}
 }
-
-CommentThread.propTypes = {
-   	
-};
 
 export default CommentThread;

@@ -35,7 +35,6 @@ class ItemThreadList extends Component {
     }
 
     getSpinning() {
-        console.log('spinning');
         return (
             <div className="initial-wrapper">
                 Loading ...

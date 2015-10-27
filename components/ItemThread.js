@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import url from 'url';
 import { fetchItemThreadIfNeeded } from '../actions';
-import { GIF_GRAY_ARROW_2X } from '../constants'; // load the gif data
+import { getVote, getAuthor, getLastUpdatedTime } from './Composition';
 
 import '../public/stylesheets/thread.css';
 
@@ -23,27 +22,16 @@ class ItemThread extends Component {
         return (
             <a href={'https://news.ycombinator.com/item?id=' + props.id}>{commentText}</a>
         );
-      }
-
-    getAuthor(props) {
-        let by = props.by;
-        return (
-            <a href={'https://news.ycombinator.com/user?id=' + by}>{by}</a>
-        );
-    }
-
-    getLastUpdatedTime(props) {
-        return moment.utc(props.time * 1000).fromNow();
     }
 
     getSubtext(props, cleanDisplay = false) {
         return !cleanDisplay ? (
             <div className="newsItem-subtext">
-                {props.score} points by {this.getAuthor(props)} {this.getLastUpdatedTime(props)} | {this.getCommentLink(props)}
+                {props.score} points by {getAuthor(props)} {getLastUpdatedTime(props)} | {this.getCommentLink(props)}
             </div>
         ) : (
             <div className="newsItem-subtext">
-                {this.getLastUpdatedTime(props)}
+                {getLastUpdatedTime(props)}
             </div>
         );
     }
@@ -81,16 +69,6 @@ class ItemThread extends Component {
         );
     }
 
-    getVote() {
-        return (
-            <div className="newsItem-vote">
-                <a href={'https://news.ycombinator.com/vote?for=' + this._id + '&dir=up&whence=news'}>
-                    <img src={GIF_GRAY_ARROW_2X} width="10"/>
-                </a>
-            </div>
-        );
-    }
-
     render() {
         let props = this.props.context || {};
         let cleanDisplay = this.props.selectedPath === 'jobs';
@@ -105,7 +83,7 @@ class ItemThread extends Component {
         ) : (
             <div className="newsItem">
                 {this.getRank(props)}
-                {this.getVote(props)}
+                {getVote(props)}
                 <div className="newsItem-itemText">
                     {this.getTitle(props)}
                     {this.getSubtext(props)}
@@ -114,9 +92,5 @@ class ItemThread extends Component {
         );
     }
 }
-
-ItemThread.propTypes = {
-    
-};
 
 export default ItemThread;

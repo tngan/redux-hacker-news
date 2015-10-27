@@ -4,10 +4,12 @@ import { GIF_Y18, GIF_S, BASE_API_URL, YCOMB_DOMAIN, NEWS_DOMAIN } from '../cons
 import '../public/stylesheets/header.css';
 
 class NewsHeader extends Component {
+
 	constructor(props) {
 		super(props);
 		this._selectedPath = props.selectedPath || '';
 	}
+
 	getNavItem(config, isFocus = false){
 		let {link, display} = config,
 		 	style = isFocus ? 'link-selected' : '';
@@ -17,6 +19,7 @@ class NewsHeader extends Component {
     		</a>
 		);
 	}
+	
 	render() {
 		let navItemConfigs = [{
 			link: 'newest',
