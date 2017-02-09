@@ -18,6 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "firebase": "^2.3.2",
     "history": "^1.9.0",
     "humps": "^0.6.0",
     "react": "^0.14.0-rc1",
